@@ -1,3 +1,6 @@
+/**
+ * Initializing the button names
+ */
 const barChartSectionBtn = document.getElementById('SampleBarChart');
 const pieChartSectionBtn = document.getElementById('SamplePieChart');
 const doughnutChartSectionBtn = document.getElementById('SampleDoughnutChart');
@@ -22,6 +25,9 @@ const icicleDownloadBtn = document.getElementById('icicleDownload');
 const treemapDownloadBtn = document.getElementById('treemapDownload');
 const radarDownloadBtn = document.getElementById('radarDownload');
 
+/**
+ * when clicking chart name button,the relevent chart description is scrolled up.
+ */
 barChartSectionBtn.onclick = e => {
     document.getElementById("cardBarChart").scrollIntoView();
 }
@@ -56,12 +62,22 @@ radarChartSectionBtn.onclick = e => {
     document.getElementById("cardRadarChart").scrollIntoView();
 }
 
+/**
+ * Download the relevent chart data CSV file.
+ * @param {string} name
+ */
 function download(name) {
-    var element = document.createElement('a');
+    let element = document.createElement('a');
     element.setAttribute('href', `/data/${name}.csv`);
     element.setAttribute('download', `${name}.csv`);
     element.click()
 }
+
+/**
+ * calling the download function after button onlick event
+ * @param {Event} e 
+ * @param {string} name 
+ */
 
 function handleClick(e, name) {
     e.preventDefault();
@@ -69,6 +85,9 @@ function handleClick(e, name) {
     download(name);
 }
 
+/**
+ * According to the chart name and button onclick, calling the handleClick function
+ */
 barDownloadBtn.onclick = e => {
     handleClick(e, 'bar');
 }
@@ -99,7 +118,6 @@ icicleDownloadBtn.onclick = e => {
 treemapDownloadBtn.onclick = e => {
     handleClick(e, 'treemap');
 }
-
 radarDownloadBtn.onclick = e => {
     handleClick(e, 'radar');
 }

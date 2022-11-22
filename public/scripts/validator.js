@@ -7,7 +7,8 @@ class Validator {
         name: 30,
         chartName: 40,
         token: 32,
-        id: 32
+        id: 32,
+        date: 10
     }
 
     // regex patterns for the fields
@@ -17,13 +18,18 @@ class Validator {
         name: /^[A-Za-z]{2,30}$/,
         chartName: /^[\x20-\x7e]{1,40}$/,
         token: /^[0-9a-fA-F]{1,32}$/,
-        id: /^[0-9a-fA-F]{1,32}$/
+        id: /^[0-9a-fA-F]{1,32}$/,
+        date: /^[1-3]?[0-9]\/(?:1[0-2]|[1-9])\/[0-9]{4}$/
     };
 
     // valid chart types
     static _chartTypes = ['bar', 'pie', 'line', 'doughnut', 'polarArea', 'radar', 'scatter', 'bubble', 'sunburst', 'treemap', 'icicle'];
 
-    // checks if a string is a valid json encoded object
+    /**
+     * Check if a string is a valid json encoded object.
+     * @param {string} jsonstr string to be checked
+     * @returns {boolean}
+     */
     static _isJson(jsonstr) {
         try {
             if (!jsonstr) return false;
@@ -34,7 +40,12 @@ class Validator {
         }
     }
 
-    // validates the value according to the type
+    /**
+     * Validates the value according to the type.
+     * @param {string} type type of the string
+     * @param {string} value value to be checked
+     * @returns {boolean}
+     */
     static validate(type, value) {
         try {
             if (typeof value !== 'string') return false;
@@ -53,4 +64,6 @@ class Validator {
     }
 }
 
-module.exports = Validator;
+if (typeof module !== 'undefined') {
+    module.exports = Validator;
+}

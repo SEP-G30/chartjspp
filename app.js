@@ -38,6 +38,7 @@ async function startServer() {
     app.set('view engine', 'ejs');
     app.use(express.urlencoded({ limit: "5mb", extended: true, parameterLimit: 50 }));
 
+    // use mongo store for session storage when possible
     let sessionStore = null;
     if (mongoConnected) {
         sessionStore = MongoStore.create({
@@ -87,7 +88,7 @@ async function startServer() {
     app.use('/', require('./routes/passwordReset'));
     app.use('/chart', require('./routes/chart'));
     app.use('/sampleData', require('./routes/sampleData'));
-    app.use('/userManual', require('./routes/userManual'));// routes for any user (login not required)
+    app.use('/userManual', require('./routes/userManual'));
 
     // authenticate user
     app.use('/', require('./routes/auth'));
